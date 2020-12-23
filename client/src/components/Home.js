@@ -1,16 +1,25 @@
 import { useState } from 'react';
 import useGeoLocation from './useGeoLocation';
 import Weather from './Weather';
+import { Container, Col, Row } from 'react-bootstrap';
 
 function Home() {
     
     // const location = useGeoLocation();
 
     return (
-        <div>This is the Home component
-            {/* <h1>{ location.loaded ? JSON.stringify(location.coordinates) : "No location data"}</h1> */}
-            <Weather />
-        </div>
+        <Container style={{paddingTop: 20}}>
+        <Row md='auto'>
+        <Col></Col>
+          <Col md='auto'><Weather /></Col>
+          <Col></Col>
+        </Row>
+        <Row>
+          <Col></Col>
+          <Col></Col>
+          <Col></Col>
+        </Row>
+      </Container>
     )
 }
 

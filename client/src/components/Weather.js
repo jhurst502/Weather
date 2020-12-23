@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import './Weather.css';
+import '../weatherIcons/css/weather-icons.css'
 
 function Weather() {
   const [location, setLocation] = useState({
@@ -75,22 +77,23 @@ function Weather() {
       });
   }, [weatherApi]);
 
-  return (
-    <div>
-      <h1>Weather comp works</h1>
-      <h2>
-        {state.weatherData.main
-          ? JSON.stringify(state.weatherData.main)
-          : "API Data Cannot Be Found"}
-      </h2>
-      <h2>Temperature {state.weatherData.main
-          ? tempConversion(JSON.stringify(state.weatherData.main.temp))
-          : "API Data Cannot Be Found"}</h2>
-      <h2>Feels Like {state.weatherData.main
-          ? tempConversion(JSON.stringify(state.weatherData.main.feels_like))
-          : "API Data Cannot Be Found"}</h2>
-    </div>
-  );
+
+
+  if (state.weatherData.main) {
+    return (
+      <div className='weather'>
+        <h1>{tempConversion(JSON.stringify(state.weatherData.main.temp))}
+        <span>&#176;</span>
+        <i className={`wi wi-owm-${state.weatherData.weather[0].id}`}></i>
+        </h1>
+        <h2>Feels Like {tempConversion(JSON.stringify(state.weatherData.main.feels_like))}</h2>
+      </div>
+    )
+  } else {
+    return (
+      <h1>API data cannot be found :(</h1>
+    )
+  }
 }
 
 export default Weather;
