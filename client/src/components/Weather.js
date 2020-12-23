@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import './Weather.css';
 import '../weatherIcons/css/weather-icons.css'
+import { Spinner } from 'react-bootstrap';
 
 function Weather() {
   const [location, setLocation] = useState({
@@ -77,21 +78,38 @@ function Weather() {
       });
   }, [weatherApi]);
 
+  let today = new Date();
+  let seconds = today.getTime() / 1000;
+
+  console.log(seconds);
+  
 
 
   if (state.weatherData.main) {
+    let sun = '';
+    if (state.weatherData.weather[0].id > 199 && state.weatherData.weather[0].id < 958) {
+      if (seconds > state.weatherData.sys.sunrise && seconds < state.weatherData.sys.sunset) {
+        sun = 'day-';
+      } else {
+        sun = 'night-';
+      }
+    }
+
+    console.log(`wi wi-owm-${sun}${state.weatherData.weather[0].id}`);
     return (
       <div className='weather'>
         <h1>{tempConversion(JSON.stringify(state.weatherData.main.temp))}
         <span>&#176;</span>
-        <i className={`wi wi-owm-${state.weatherData.weather[0].id}`}></i>
+        <i className={`wi wi-owm-${sun}${state.weatherData.weather[0].id}`}></i>
         </h1>
-        <h2>Feels Like {tempConversion(JSON.stringify(state.weatherData.main.feels_like))}</h2>
+        <h2>Feels Like {tempConversion(JSON.stringify(state.weatherData.main.feels_like))}
+        <span>&#176;</span></h2>
+        <h3>Location: {state.weatherData.name}</h3>
       </div>
     )
   } else {
     return (
-      <h1>API data cannot be found :(</h1>
+      <div className='loading'><Spinner animation="border" variant="secondary" /></div>
     )
   }
 }
