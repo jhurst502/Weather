@@ -1,46 +1,39 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-const useGeoLocation = () => {
+const useLocation = () => {
+
     const [location, setLocation] = useState({
         loaded: false,
-        coords: {latitude: '', longitude: ''}
-    });
+        coords: { latitude: "", longitude: "" },
+      });
 
-    const onSuccess = location => {
-        setLocation({
-            loaded: true,
-            coords: {
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude,
-            }
-        })
-        console.log(location);
-    }
-
-    const onError = error => {
-        setLocation({
-            loaded: true,
-            error,
-        })
-        console.log(location);
-    }
+      const getPosition = () => {
+        return new Promise(function (resolve, reject) {
+          navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
+      };
 
     useEffect(() => {
-        if( !('geolocation' in navigator) ){
-            setLocation(state => ({
-                ...state,
-                loaded: true,
-                error: {
-                    code: 0,
-                    message: "Geolocation not enabled",
-                },
-            }));
+        if ("geolocation" in navigator) {
+          console.log(getPosition());
+          getPosition().then((position) => {
+            console.log(position.coords);
+            setLocation({
+              loaded: true,
+              coords: {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+              },
+            });
+          });
+        } else {
+          console.log("Geolocation not availible");
         }
 
-        navigator.geolocation.getCurrentPosition(onSuccess, onError)
-    }, [])
+        console.log('running');
+      }, []);
 
-    return location;
+      return location;
 }
 
-export default useGeoLocation;
+export default useLocation;
