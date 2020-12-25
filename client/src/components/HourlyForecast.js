@@ -9,6 +9,7 @@ function HourlyForecast() {
         //console.log(location);
         console.log(api);
     },[api]);
+
     
     if(api.status === 'fetched' && api.weather.hourly){
         console.log(api.weather.hourly);

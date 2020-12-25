@@ -6,26 +6,25 @@ const useGetAPI = (useLocation) => {
     const [weather, setWeather] = useState({});
 
     let location = useGeoLocation();
-    console.log(location);
 
     useEffect(() => {
         if (!location) {
             console.log('Location not found, put zip here...');
             return;
+        } else {
+            const fetchData = async () => {
+                setStatus('fetching');
+                const response = await fetch(
+                    `https://api.openweathermap.org/data/2.5/onecall?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=${process.env.REACT_APP_WEATHER_API_KEY2}`
+                );
+    
+                const weather = await response.json();
+                setWeather(weather);
+                setStatus('fetched');
+            };
+    
+            fetchData();
         }
-
-        const fetchData = async () => {
-            setStatus('fetching');
-            const response = await fetch(
-                `https://api.openweathermap.org/data/2.5/onecall?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=${process.env.REACT_APP_WEATHER_API_KEY2}`
-            );
-
-            const weather = await response.json();
-            setWeather(weather);
-            setStatus('fetched');
-        };
-
-        fetchData();
     }, [location, useLocation]);
 
     return { status, weather };

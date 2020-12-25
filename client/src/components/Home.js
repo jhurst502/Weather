@@ -5,6 +5,7 @@ import { Container, Col, Row } from 'react-bootstrap';
 import HourlyForecast from './HourlyForecast';
 import SevenDayForecast from './SevenDayForecast';
 import Lunar from './Lunar';
+import TotalSevenDay from './TotalSevenDay';
 
 function Home() {
     

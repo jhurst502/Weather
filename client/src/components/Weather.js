@@ -19,6 +19,7 @@ function Weather() {
     console.log(api);
 },[api]);
 
+  // Find day or night ID
   let today = new Date();
   let seconds = today.getTime() / 1000;
 
