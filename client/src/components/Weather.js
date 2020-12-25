@@ -1,70 +1,23 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import "./Weather.css";
 import "../weatherIcons/css/weather-icons.css";
 import { Spinner } from "react-bootstrap";
+import useGetAPI from './useGetAPI';
 
 function Weather() {
-  const [location, setLocation] = useState({
-    loaded: false,
-    coords: { latitude: "", longitude: "" },
-  });
-
-  const [weatherApi, setWeatherApi] = useState("");
-
-  const getPosition = () => {
-    return new Promise(function (resolve, reject) {
-      navigator.geolocation.getCurrentPosition(resolve, reject);
-    });
-  };
-
-  useEffect(() => {
-    if ("geolocation" in navigator) {
-      console.log(getPosition());
-      getPosition().then((position) => {
-        console.log(position.coords);
-        setLocation({
-          loaded: true,
-          coords: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          },
-        });
-        setWeatherApi(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_WEATHER_API_KEY2}`
-        );
-      });
-    } else {
-      console.log("Geolocation not availible");
-    }
-  }, []);
-
-  const [weather, setWeather] = useState({});
 
   function tempConversion(e) {
     let j = Math.round(e * (9 / 5) - 459.67);
     return j;
   }
 
-  useEffect(() => {
-    console.log(weatherApi);
-    // axios
-    //   .get(weatherApi)
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     let data = res.data;
-    //     setState({ weatherData: [data], loaded: true });
-    //   })
-    //   .catch((error) => {
-    //     console.log(`Cannot Get API Data: ${error}`);
-    //   });
+  const api = useGetAPI();
+  let weather = api.weather;
 
-    fetch(weatherApi)
-      .then((res) => res.json())
-      .then((res) => {
-        setWeather(res);
-      });
-  }, [weatherApi]);
+  useEffect(() => {
+    //console.log(location);
+    console.log(api);
+},[api]);
 
   let today = new Date();
   let seconds = today.getTime() / 1000;

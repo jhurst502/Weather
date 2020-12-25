@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useLocation = () => {
+const useGeoLocation = () => {
 
     const [location, setLocation] = useState({
         loaded: false,
@@ -36,4 +36,4 @@ const useLocation = () => {
       return location;
 }
 
-export default useLocation;
+export default useGeoLocation;
