@@ -1,1 +1,4 @@
 theme: jekyll-theme-tactile
+
+- name: ShellCheck
+  uses: ludeeus/action-shellcheck@1.0.0
