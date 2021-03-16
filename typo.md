@@ -1,1 +1,1 @@
-This lfoie hasd sevrl typos in it more reset
+This lfoie hasd sevrl typos in it more rese
