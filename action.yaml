@@ -3,7 +3,5 @@ on: [pull_request, push]
 
 jobs:
   steps:
-    - run: echo Testing
-      shell: bash
-    - run: $GITHUB_ACTION_PATH/entrypoint.sh
+    - run: ./entrypoint.sh
       shell: bash
