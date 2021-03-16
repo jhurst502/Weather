@@ -1,4 +1,5 @@
 name: 'Spellcheck'
+on: pull_request
 description: 'Runs write-good on all md files'
 runs:
   using: 'composite'
