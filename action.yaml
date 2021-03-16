@@ -1,8 +1,7 @@
 name: "Spellcheck"
 on: [pull_request, push]
-description: "Runs write-good on all md files"
-runs:
-  using: "composite"
+
+jobs:
   steps:
     - run: echo Testing
       shell: bash
