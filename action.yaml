@@ -4,7 +4,7 @@ description: "Runs write-good on all md files"
 runs:
   using: "composite"
   steps:
-  - run: echo Testing
+    - run: echo Testing
       shell: bash
-    - run: ./entrypoint.sh
+    - run: $GITHUB_ACTION_PATH/entrypoint.sh
       shell: bash
