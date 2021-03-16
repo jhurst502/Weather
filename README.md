@@ -1,2 +1,2 @@
 # Weather
-Weather App React Project tstet dsigign haer her
+Weather App React Project
