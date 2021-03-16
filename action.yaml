@@ -1,8 +1,8 @@
-name: 'Spellcheck'
+name: "Spellcheck"
 on: pull_request, push
-description: 'Runs write-good on all md files'
+description: "Runs write-good on all md files"
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - run: ${{ github.action_path }}/entrypoint.sh
       shell: bash
