@@ -4,5 +4,7 @@ description: "Runs write-good on all md files"
 runs:
   using: "composite"
   steps:
+  - run: echo Testing
+      shell: bash
     - run: ./entrypoint.sh
       shell: bash
