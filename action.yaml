@@ -1,0 +1,7 @@
+name: 'Spellcheck'
+description: 'Runs write-good on all md files'
+runs:
+  using: 'composite'
+  steps:
+    - run: ${{ github.action_path }}/entrypoint.sh
+      shell: bash
